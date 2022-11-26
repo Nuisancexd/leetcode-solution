@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+private:
+	vector<vector<int>> vec;
+public:
+	vector<vector<int>> permute(vector<int>& nums)
+	{
+		back_track(nums, 0, nums.size() - 1);
+
+		for (int i = 0; i < vec.size(); i++)
+		{
+			for (int j = 0; j < vec[i].size(); j++)
+			{
+				cout << vec[i][j];
+			}
+			cout << endl;
+		}
+
+		return vec;
+	}
+	void back_track(vector<int> num, int begin, int end)
+	{
+		if (begin == end)
+		{
+			vec.push_back(num);
+		}
+		else
+		{
+			for (int i = begin; i <= end; i++)
+			{
+				swap(num[begin], num[i]);
+				back_track(num, begin + 1, end);
+				swap(num[begin], num[i]);
+			}
+		}
+	}
+
+};
+int main()
+{
+	Solution sl;
+	vector<int> vec = {1, 2, 3};
+	sl.permute(vec);
+	return 0;
+}
